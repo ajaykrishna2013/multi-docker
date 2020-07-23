@@ -10,12 +10,12 @@ script:
 
 after_success:
   - docker build -t ajkris/multi-client ./client
-  - docker build -t ajkris/multi-nginx ./multi-nginx
+  - docker build -t ajkris/multi-nginx ./nginx
   - docker build -t ajkris/multi-server ./server
-  - docker build -t ajkris/muti-worker ./worker
+  - docker build -t ajkris/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push ajkris/multi-client
   - docker push ajkris/multi-nginx
   - docker push ajkris/multi-server
-  - docker push ajkris/muti-worker
+  - docker push ajkris/multi-worker
  
