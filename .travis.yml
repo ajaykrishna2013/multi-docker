@@ -1,21 +1,21 @@
-sude: required
+sudo: required
 services:
   - docker
 
-  before_install:
-    - docker build -t ajkris/react-test -f ./client/Dockerfile.dev ./client
+before_install:
+  - docker build -t ajkris/react-test -f ./client/Dockerfile.dev ./client
 
-  script:
-    - docker run -e CI=true ajkris/react-test npm run test
+script:
+  - docker run -e CI=true ajkris/react-test npm run test
 
-  after_success:
-    - docker build -t ajkris/multi-client ./client
-    - docker build -t ajkris/multi-nginx ./multi-nginx
-    - docker build -t ajkris/multi-server ./server
-    - docker build -t ajkris/muti-worker ./worker
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
-    - docker push ajkris/multi-client
-    - docker push ajkris/multi-nginx
-    - docker push ajkris/multi-server
-    - docker push ajkris/muti-worker
+after_success:
+  - docker build -t ajkris/multi-client ./client
+  - docker build -t ajkris/multi-nginx ./multi-nginx
+  - docker build -t ajkris/multi-server ./server
+  - docker build -t ajkris/muti-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
+  - docker push ajkris/multi-client
+  - docker push ajkris/multi-nginx
+  - docker push ajkris/multi-server
+  - docker push ajkris/muti-worker
  
