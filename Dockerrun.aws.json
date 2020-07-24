@@ -1,0 +1,34 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "ajkris/multi-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "ajkris/multi-server",
+			"hostname": "api",
+			"essential": false	
+		},
+		{
+			"name": "worker",
+			"image": "ajkris/multi-worker",
+			"hostname": "worker",
+			"essential": false	
+		},
+		{
+			"name": "nginx",
+			"image": "ajkris/multi-nginx",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort": 80,
+					"containerPort": 80
+				}
+			]	
+		}
+	]
+}
